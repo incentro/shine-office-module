@@ -2,14 +2,15 @@
   "name": "incentro-adf-office-module",
   "version": "1.0.0",
   "description": "Office module for Alfresco Apps Development Framework. Edit with MS Office",
-  "main": "lib/app.js",
+  "main": "lib/index.js",
   "scripts": {
     "watch": "tsc -p src -w",
-    "build": "rm -rf lib && tsc -p \"./tsconfig.json\""
+    "build": "rm -rf lib && tsc -p \"./tsconfig.json\"",
+    "prepublish": "rm -rf lib && tsc -p \"./tsconfig.json\""
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:incentro-ondemand/shine-test.git"
+    "url": "git@bitbucket.org:incentro-ondemand/shine-office.git"
   },
   "keywords": [
     "office",

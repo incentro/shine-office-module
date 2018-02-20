@@ -1,13 +1,11 @@
 import {NgModule} from '@angular/core';
-import {OfficeActionsService} from './services/office-actions.service';
-import {OfficeLauncherService} from './services/office-launcher.service';
+import {OfficeActionsService} from './services';
 
 @NgModule({
   imports: [],
   declarations: [],
   providers: [
-    OfficeActionsService,
-    OfficeLauncherService
+    OfficeActionsService
   ],
   exports: []
 })

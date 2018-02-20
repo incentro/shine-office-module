@@ -1,4 +1,3 @@
-import {OfficeLauncherService} from './office-launcher.service';
 import {Injectable} from '@angular/core';
 
 
@@ -7,7 +6,9 @@ import {Injectable} from '@angular/core';
  */
 
 @Injectable()
-export class OfficeActionsService extends OfficeLauncherService {
+export class OfficeActionsService {
+  userAgent = navigator.userAgent.toLowerCase();
+
 
   editOnline(entry, ecmHost) {
     let filepath = entry.path.name;
@@ -21,62 +22,16 @@ export class OfficeActionsService extends OfficeLauncherService {
   private triggerEditOnlineAos(onlineEditUrlAos, fileExtension) {
     let protocolHandler = this.getProtocolForFileExtension(fileExtension);
 
-
     // detect if we are on a supported operating system
     if (!this.isWin() && !this.isMac()) {
       alert('This feature is only available on Windows or Mac OS X.');
       return;
     }
 
-    // if we have a working PlugIn (ActiveX or NPAPI), use it. Otherwise we use the protocol handler (e.g. Chrome w/o PlugIn)
-    if (this.isAvailable()) {
-      this.launchOfficeByPlugin(this, onlineEditUrlAos);
-    } else {
-      this.tryToLaunchOfficeByMsProtocolHandler(this, protocolHandler, onlineEditUrlAos);
-    }
+    this.launchMsOfficeProtocolHandler(protocolHandler, onlineEditUrlAos);
   }
 
-  private launchOfficeByPlugin(officeLauncher, url) {
-    let checker;
-    let isNotIE = (officeLauncher.isFirefox() || officeLauncher.isChrome() || officeLauncher.isSafari());
-    if (!officeLauncher.EditDocument(url)) {
-      // check if the Plug-In has been blocked
-      if (officeLauncher.isControlNotActivated() && isNotIE) {
-        checker = window.setInterval(function () {
-          if (officeLauncher.isControlActivated()) {
-            window.clearInterval(checker);
-            window.setTimeout(function () {
-              if (!officeLauncher.EditDocument(url) && officeLauncher.getLastControlResult() !== -2) {
-                let errorDetails = officeLauncher.getLastControlResult() !== false ? ' (Error code: ' + officeLauncher.getLastControlResult() + ')' : '';
-                alert('Microsoft Office kan niet worden geopend.' + errorDetails);
-              }
-            }, 50);
-          }
-        }, 250);
-
-        let messageKey = '';
-        if (officeLauncher.isFirefox()) {
-          messageKey = 'Klik op de werkbalk van Firefox om door te gaan.';
-        } else if (officeLauncher.isChrome()) {
-          messageKey = 'Klik op de blokkeringsindicator in de adresbalk van Chrome om door te gaan.';
-        } else if (officeLauncher.isSafari()) {
-          messageKey = 'Klik op Vertrouwen om door te gaan.';
-        }
-        alert(messageKey);
-      } else {
-        if (officeLauncher.getLastControlResult() !== -2) {
-          // error message only required if user did not cancel (result === -2)
-          let errorDetails = officeLauncher.getLastControlResult() !== false ? ' (Error code: ' + officeLauncher.getLastControlResult() + ')' : '';
-          alert('Microsoft Office kan niet worden geopend. ' + errorDetails);
-        }
-      }
-    } else {
-      console.log('refresh');
-    }
-  }
-
-  private tryToLaunchOfficeByMsProtocolHandler(officeLauncher, protocolHandler, url) {
-    let protocolUrl = protocolHandler + ':ofe%7Cu%7C' + url;
+  private launchMsOfficeProtocolHandler(protocolHandler, url) {
     let protocolHandlerPresent = false;
     let input = document.createElement('input');
     let inputTop = document.body.scrollTop + 10;
@@ -88,17 +43,27 @@ export class OfficeActionsService extends OfficeLauncherService {
       protocolHandlerPresent = true;
     };
 
-    location.href = protocolUrl;
+    location.href = protocolHandler + ':ofe%7Cu%7C' + url;;
     setTimeout(function () {
       input.onblur = null;
       input.remove();
       if (!protocolHandlerPresent) {
         alert('U gebruikt een versie van Microsoft Office die niet door Alfresco wordt ondersteund. Probeer Microsoft Office bij te werken.');
       }
-    }, 500);
+    }, 2000);
   }
 
-  private getProtocolForFileExtension(fileExtension) {
+
+  isWin() {
+    return (this.userAgent.indexOf('win') !== -1);
+  }
+
+  isMac() {
+    return (this.userAgent.indexOf('mac') !== -1);
+  }
+
+
+  getProtocolForFileExtension(fileExtension) {
     let msProtocolNames = {
       'doc': 'ms-word',
       'docx': 'ms-word',
@@ -128,4 +93,5 @@ export class OfficeActionsService extends OfficeLauncherService {
     };
     return msProtocolNames[fileExtension];
   }
+
 }
