@@ -1,0 +1,19 @@
+{
+  "project": {
+    "version": "1.0.0",
+    "name": "ShineTestModule"
+  },
+  "apps": [
+    {
+      "tsconfig": "tsconfig.json",
+      "mobile": false,
+      "root": "src",
+      "prefix": "incentro"
+    }
+  ],
+  "defaults": {
+    "styleExt": "scss",
+    "prefixInterfaces": false,
+    "lazyRoutePrefix": "+"
+  }
+}
