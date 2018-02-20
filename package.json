@@ -1,5 +1,5 @@
 {
-  "name": "IncentroADFOfficeModule",
+  "name": "incentro-adf-office-module",
   "version": "1.0.0",
   "description": "Office module for Alfresco Apps Development Framework. Edit with MS Office",
   "main": "lib/app.js",
