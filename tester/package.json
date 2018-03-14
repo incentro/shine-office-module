@@ -1,0 +1,53 @@
+{
+  "name": "incentro-adf-msoffice-module",
+  "version": "3.0.0",
+  "description": "Office module for Alfresco Apps Development Framework. Edit with MS Office",
+  "main": "empty-text.umd.js",
+  "jsnext:main": "empty-text.esm.js",
+  "module": "empty-text.esm.js",
+  "types": "empty-text.d.ts",
+  "scripts": {
+    "clean": "rimraf dist",
+    "copy": "node tools/copy-package.js && node tools/copy-readme.js && node tools/cleanup.js",
+    "bundle": "rimraf dist && rollup -c rollup.config.umd.js && rollup -c rollup.config.esm.js && tsc && ngc",
+    "postbundle": "node tools/removecode.js",
+    "build": "npm run bundle && npm run copy",
+    "publish": "cd ./dist && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/incentro-ondemand/shine-office.git"
+  },
+  "keywords": [
+    "office",
+    "adf",
+    "alfresco",
+    "shine",
+    "incentro",
+    "ms office",
+    "application development framework",
+    "apps development framework"
+  ],
+  "author": "kasper.reijnders@incentro.com",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/incentro-ondemand/shine-office#readme",
+  "dependencies": {
+    "@angular/compiler": "^4.0.3",
+    "@angular/core": "^4.1.0",
+    "@angular/platform-browser": "^4.1.0",
+    "rxjs": "^5.3.0",
+    "zone.js": "^0.8.9"
+  },
+  "devDependencies": {
+    "@angular/compiler": "^4.1.0",
+    "@angular/compiler-cli": "^4.4.6",
+    "@types/node": "^7.0.14",
+    "del": "^2.2.2",
+    "node-sass": "^4.5.3",
+    "rollup-plugin-angular": "^0.4.4",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-typescript2": "^0.12.0",
+    "typescript": "^2.3.2"
+  }
+}
