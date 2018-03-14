@@ -1,5 +1,4 @@
-import {Injectable} from '@angular/core';
-
+import { Injectable } from '@angular/core';
 
 /**
  * OfficeActionsService uses the Alfresco Office Services link to open documents.

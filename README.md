@@ -1,38 +1,72 @@
-# OfficeActionsService
+# incentro-adf-msoffice-module
 
-This module is created for the Alfresco ADF and will not work without ADF.
+## Installation
 
-
-## Usage
-
-Install via npm.
+To install this library, run:
 
 ```bash
-npm install --save incentro-adf-msoffice-module
+$ npm install incentro-adf-msoffice-module --save
 ```
 
-Include the module in your angular module
+## Consuming your library
+
+Once you have published your library to npm, you can import your library in any Angular application by running:
+
+```bash
+$ npm install incentro-adf-msoffice-module
+```
+
+and then from your Angular `AppModule`:
+
 ```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+
+// Import your library
+import { SampleModule } from 'incentro-adf-msoffice-module';
+
 @NgModule({
+  declarations: [
+    AppComponent
+  ],
   imports: [
-    IncentroOfficeModule,
-    ...
-  ]
+    BrowserModule,
+
+    // Specify your library as an import
+    LibraryModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
+export class AppModule { }
 ```
 
-To use the service add it to your component and call the function with a MinimalNodeEntry and the ECM Host.
-```typescript
-@Component(...)
-export class ExampleComponent {
-  constructor(private officeActionsService: OfficeActionsService,
-              private appConfigService: AppConfigService) {
-    
-  }
-  
-  openInOffice(event) {
-    const ecmHost = this.appConfigService.get('ecmHost');
-    this.officeActionsService.editOnline(event.value.entry, ecmHost);
-  }
-}
+Once your library is imported, you can use its components, directives and pipes in your Angular application:
+
+```xml
+<!-- You can now use your library component in app.component.html -->
+<h1>
+  {{title}}
+</h1>
+<sampleComponent></sampleComponent>
 ```
+
+## Development
+
+To generate all `*.js`, `*.d.ts` and `*.metadata.json` files:
+
+```bash
+$ npm run build
+```
+
+To lint all `*.ts` files:
+
+```bash
+$ npm run lint
+```
+
+## License
+
+MIT © [Kasper Reijnders](mailto:kasper.reijnders@incentro.com)
