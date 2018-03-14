@@ -1,12 +1,11 @@
 {
   "name": "incentro-adf-msoffice-module",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Office module for Alfresco Apps Development Framework. Edit with MS Office",
   "main": "lib/index.js",
   "scripts": {
     "watch": "tsc -p src -w",
-    "build": "rm -rf lib && tsc -p \"./tsconfig.json\"",
-    "prepublish": "rm -rf lib && tsc -p \"./tsconfig.json\""
+    "build": "rm -rf lib && tsc -p \"./tsconfig.json\""
   },
   "repository": {
     "type": "git",

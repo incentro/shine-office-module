@@ -8,7 +8,7 @@ This module is created for the Alfresco ADF and will not work without ADF.
 Install via npm.
 
 ```bash
-npm install --save incentro-adf-office-module
+npm install --save incentro-adf-msoffice-module
 ```
 
 Include the module in your angular module
