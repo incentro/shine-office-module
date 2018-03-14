@@ -1,0 +1,33 @@
+{
+  "name": "incentro-adf-msoffice-module",
+  "version": "3.1.0",
+  "description": "Office module for Alfresco Apps Development Framework. Edit with MS Office",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/incentro-ondemand/shine-office.git"
+  },
+  "author": {
+    "name": "Kasper Reijnders",
+    "email": "kasper.reijnders@incentro.com"
+  },
+  "keywords": [
+    "office",
+    "adf",
+    "alfresco",
+    "shine",
+    "incentro",
+    "ms office",
+    "application development framework",
+    "apps development framework"
+  ],
+  "license": "MIT",
+  "main": "incentro-adf-msoffice-module.umd.js",
+  "module": "incentro-adf-msoffice-module.js",
+  "jsnext:main": "incentro-adf-msoffice-module.js",
+  "typings": "incentro-adf-msoffice-module.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  }
+}
