@@ -5,5 +5,5 @@ jspm_packages
 lib
 build
 dist
-package-lock.json
+.rpt2_cache
 .vscode
