@@ -1,6 +1,6 @@
 {
   "name": "incentro-adf-msoffice-module",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Office module for Alfresco Apps Development Framework. Edit with MS Office",
   "scripts": {
     "build": "gulp build",
