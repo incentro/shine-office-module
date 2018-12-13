@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 /**
  * OfficeActionsService uses the Alfresco Office Services link to open documents.
@@ -6,24 +6,53 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class OfficeActionsService {
+
+  DEFAULT_TIMEOUT = 2000;
+  timeout;
   userAgent = navigator.userAgent.toLowerCase();
 
+  messages = {
+    'WINDOWS_MAC_ONLY': 'Deze feature werkt alleen op Windows en Mac OS X.',
+    'TIMEOUT': 'U gebruikt een versie van Microsoft Office die niet door Alfresco wordt ondersteund. Probeer Microsoft Office bij te werken.'
+  };
 
-  editOnline(entry, ecmHost) {
+  /**
+   *
+   * @param entry NodeEntry
+   * @param ecmHost
+   * @param timeout (optional) in ms if it is 0 the timeout will not be set at all.
+   * @param messages (optional) {'WINDOWS_MAC_ONLY', 'TIMEOUT'} Translated strings
+   */
+  editOnline(entry, ecmHost, timeout?, messages?) {
+    if (messages) {
+      this.updateMessages(messages);
+    }
+
+    this.timeout = timeout || this.DEFAULT_TIMEOUT;
+
     let filepath = entry.path.name;
-    let position = filepath.split('/', 2).join('/').length;
+    const position = filepath.split('/', 2).join('/').length;
     filepath = filepath.slice(position) + '/' + entry.name;
-    let url = ecmHost + '/alfresco/aos' + filepath;
-    let extension = entry.name.substring(entry.name.lastIndexOf('.') + 1, entry.name.length);
+    const url = ecmHost + '/alfresco/aos' + filepath;
+    const extension = entry.name.substring(entry.name.lastIndexOf('.') + 1, entry.name.length);
     this.triggerEditOnlineAos(url, extension);
   }
 
+  private updateMessages(messages) {
+    if (messages.TIMEOUT) {
+      this.messages.TIMEOUT = messages.TIMEOUT;
+    }
+    if (messages.WINDOWS_MAC_ONLY) {
+      this.messages.WINDOWS_MAC_ONLY = messages.WINDOWS_MAC_ONLY;
+    }
+  }
+
   private triggerEditOnlineAos(onlineEditUrlAos, fileExtension) {
-    let protocolHandler = this.getProtocolForFileExtension(fileExtension);
+    const protocolHandler = OfficeActionsService.getProtocolForFileExtension(fileExtension);
 
     // detect if we are on a supported operating system
     if (!this.isWin() && !this.isMac()) {
-      alert('This feature is only available on Windows or Mac OS X.');
+      alert(this.messages.WINDOWS_MAC_ONLY);
       return;
     }
 
@@ -32,24 +61,36 @@ export class OfficeActionsService {
 
   private launchMsOfficeProtocolHandler(protocolHandler, url) {
     let protocolHandlerPresent = false;
-    let input = document.createElement('input');
-    let inputTop = document.body.scrollTop + 10;
+    const input = document.createElement('input');
+    const inputTop = document.body.scrollTop + 10;
 
-    input.setAttribute('style', 'z-index: 1000; background-color: rgba(0, 0, 0, 0); border: none; outline: none; position: absolute; left: 10px; top: ' + inputTop + 'px;');
+    input.setAttribute('style', `
+      z-index: 1000; 
+      background-color: rgba(0, 0, 0, 0); 
+      border: none; 
+      outline: none; 
+      position: absolute; 
+      left: 10px; 
+      top: ${inputTop}px;
+    `);
     document.getElementsByTagName('body')[0].appendChild(input);
     input.focus();
     input.onblur = function () {
       protocolHandlerPresent = true;
     };
 
-    location.href = protocolHandler + ':ofe%7Cu%7C' + url;;
-    setTimeout(function () {
-      input.onblur = null;
-      input.remove();
-      if (!protocolHandlerPresent) {
-        alert('U gebruikt een versie van Microsoft Office die niet door Alfresco wordt ondersteund. Probeer Microsoft Office bij te werken.');
-      }
-    }, 2000);
+    location.href = protocolHandler + ':ofe%7Cu%7C' + url;
+
+    const TIMEOUT_MESSAGE = this.messages.TIMEOUT;
+    if (this.timeout > 0) {
+      setTimeout(() => {
+        input.onblur = null;
+        input.remove();
+        if (!protocolHandlerPresent) {
+          alert(TIMEOUT_MESSAGE);
+        }
+      }, this.timeout);
+    }
   }
 
 
@@ -62,7 +103,7 @@ export class OfficeActionsService {
   }
 
 
-  getProtocolForFileExtension(fileExtension) {
+  static getProtocolForFileExtension(fileExtension) {
     let msProtocolNames = {
       'doc': 'ms-word',
       'docx': 'ms-word',
