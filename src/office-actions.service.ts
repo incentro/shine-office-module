@@ -134,4 +134,31 @@ export class OfficeActionsService {
     return msProtocolNames[fileExtension];
   }
 
+  static getProtocolForMimeType(mimeType) {
+    let msProtocolNames = {
+      'application/msword': 'ms-word',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'ms-word',
+      'application/vnd.ms-word.document.macroEnabled.12': 'ms-word',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.template': 'ms-word',
+      'application/vnd.ms-word.template.macroEnabled.12': 'ms-word',
+      'application/vnd.ms-excel': 'ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'ms-excel',
+      'application/vnd.ms-excel.sheet.binary.macroEnabled.12': 'ms-excel',
+      'application/vnd.ms-excel.sheet.macroEnabled.12': 'ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.template': 'ms-excel',
+      'application/vnd.ms-excel.template.macroEnabled.12': 'ms-excel',
+      'application/vnd.ms-powerpoint': 'ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.presentationml.template': 'ms-powerpoint',
+      'application/vnd.ms-powerpoint.template.macroEnabled.12': 'ms-powerpoint',
+      'application/vnd.ms-powerpoint.presentation.macroEnabled.12': 'ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.presentationml.slideshow': 'ms-powerpoint',
+      'application/vnd.ms-powerpoint.addin.macroEnabled.12': 'ms-powerpoint',
+      'application/vnd.ms-powerpoint.slideshow.macroEnabled.12': 'ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.presentationml.slide': 'ms-powerpoint',
+      'application/vnd.ms-powerpoint.slide.macroenabled.12': 'ms-powerpoint'
+    };
+    return msProtocolNames[mimeType];
+  }
+
 }
