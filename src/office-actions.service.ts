@@ -22,8 +22,9 @@ export class OfficeActionsService {
    * @param ecmHost
    * @param timeout (optional) in ms if it is 0 the timeout will not be set at all.
    * @param messages (optional) {'WINDOWS_MAC_ONLY', 'TIMEOUT'} Translated strings
+   * @param openByMimeType (optional) boolean representing whether the correct protocol is chosen by the mimetype. false if not set.
    */
-  editOnline(entry, ecmHost, timeout?, messages?) {
+  editOnline(entry, ecmHost, timeout?, messages?, openByMimeType?) {
     if (messages) {
       this.updateMessages(messages);
     }
@@ -34,8 +35,13 @@ export class OfficeActionsService {
     const position = filepath.split('/', 2).join('/').length;
     filepath = filepath.slice(position) + '/' + entry.name;
     const url = ecmHost + '/alfresco/aos' + filepath;
-    const extension = entry.name.substring(entry.name.lastIndexOf('.') + 1, entry.name.length);
-    this.triggerEditOnlineAos(url, extension);
+    if (openByMimeType) {
+      const mimeType = entry.content.mimeType;
+      this.triggerEditOnlineAosByMimeType(url, mimeType);
+    } else {
+      const extension = entry.name.substring(entry.name.lastIndexOf('.') + 1, entry.name.length);
+      this.triggerEditOnlineAosByExtension(url, extension);
+    }
   }
 
   private updateMessages(messages) {
@@ -47,9 +53,17 @@ export class OfficeActionsService {
     }
   }
 
-  private triggerEditOnlineAos(onlineEditUrlAos, fileExtension) {
+  private triggerEditOnlineAosByExtension(onlineEditUrlAos, fileExtension) {
     const protocolHandler = OfficeActionsService.getProtocolForFileExtension(fileExtension);
+    this.checkSupportedOSAndLaunch(protocolHandler, onlineEditUrlAos);
+  }
 
+  private triggerEditOnlineAosByMimeType(onlineEditUrlAos, mimeType) {
+    const protocolHandler = OfficeActionsService.getProtocolForMimeType(mimeType);
+    this.checkSupportedOSAndLaunch(protocolHandler, onlineEditUrlAos);
+  }
+
+  private checkSupportedOSAndLaunch(protocolHandler, onlineEditUrlAos) {
     // detect if we are on a supported operating system
     if (!this.isWin() && !this.isMac()) {
       alert(this.messages.WINDOWS_MAC_ONLY);
@@ -132,6 +146,33 @@ export class OfficeActionsService {
       'sldm': 'ms-powerpoint'
     };
     return msProtocolNames[fileExtension];
+  }
+
+  static getProtocolForMimeType(mimeType) {
+    let msProtocolNames = {
+      'application/msword': 'ms-word',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'ms-word',
+      'application/vnd.ms-word.document.macroEnabled.12': 'ms-word',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.template': 'ms-word',
+      'application/vnd.ms-word.template.macroEnabled.12': 'ms-word',
+      'application/vnd.ms-excel': 'ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'ms-excel',
+      'application/vnd.ms-excel.sheet.binary.macroEnabled.12': 'ms-excel',
+      'application/vnd.ms-excel.sheet.macroEnabled.12': 'ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.template': 'ms-excel',
+      'application/vnd.ms-excel.template.macroEnabled.12': 'ms-excel',
+      'application/vnd.ms-powerpoint': 'ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.presentationml.template': 'ms-powerpoint',
+      'application/vnd.ms-powerpoint.template.macroEnabled.12': 'ms-powerpoint',
+      'application/vnd.ms-powerpoint.presentation.macroEnabled.12': 'ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.presentationml.slideshow': 'ms-powerpoint',
+      'application/vnd.ms-powerpoint.addin.macroEnabled.12': 'ms-powerpoint',
+      'application/vnd.ms-powerpoint.slideshow.macroEnabled.12': 'ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.presentationml.slide': 'ms-powerpoint',
+      'application/vnd.ms-powerpoint.slide.macroenabled.12': 'ms-powerpoint'
+    };
+    return msProtocolNames[mimeType];
   }
 
 }
