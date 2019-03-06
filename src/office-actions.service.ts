@@ -143,7 +143,19 @@ export class OfficeActionsService {
       'ppam': 'ms-powerpoint',
       'ppsm': 'ms-powerpoint',
       'sldx': 'ms-powerpoint',
-      'sldm': 'ms-powerpoint'
+      'sldm': 'ms-powerpoint',
+      'vsd': 'ms-visio',
+      'vdw': 'ms-visio',
+      'vsdm': 'ms-visio',
+      'vsdx': 'ms-visio',
+      'vss': 'ms-visio',
+      'vssm': 'ms-visio',
+      'vssx': 'ms-visio',
+      'vst': 'ms-visio',
+      'vstm': 'ms-visio',
+      'vstx': 'ms-visio',
+      'mpp': 'ms-project',
+      'mpt': 'ms-project'
     };
     return msProtocolNames[fileExtension];
   }
@@ -170,7 +182,15 @@ export class OfficeActionsService {
       'application/vnd.ms-powerpoint.addin.macroEnabled.12': 'ms-powerpoint',
       'application/vnd.ms-powerpoint.slideshow.macroEnabled.12': 'ms-powerpoint',
       'application/vnd.openxmlformats-officedocument.presentationml.slide': 'ms-powerpoint',
-      'application/vnd.ms-powerpoint.slide.macroenabled.12': 'ms-powerpoint'
+      'application/vnd.ms-powerpoint.slide.macroenabled.12': 'ms-powerpoint',
+      'application/vnd.visio': 'ms-visio',
+      'application/vnd.ms-visio.drawing.macroEnabled': 'ms-visio',
+      'application/vnd.visio2013': 'ms-visio',
+      'application/vnd.ms-visio.stencil.macroEnabled': 'ms-visio',
+      'application/vnd.ms-visio.stencil': 'ms-visio',
+      'application/vnd.ms-visio.template.macroEnabled': 'ms-visio',
+      'application/vnd.ms-visio.template': 'ms-visio',
+      'application/vnd.ms-project': 'ms-project'
     };
     return msProtocolNames[mimeType];
   }
