@@ -23,19 +23,18 @@ export class OfficeService {
 
   view(entry: NodeMinimal, timeout: number): Observable<any> {
     this.timeout = timeout || OfficeService.DEFAULT_TIMEOUT;
-    this.ecmHost = this.appConfigService.get('ecmHost');
 
     return this.open(entry, OfficeService.OPTIONS.VIEW);
   }
 
   edit(entry: NodeMinimal, timeout: number): Observable<any> {
     this.timeout = timeout || OfficeService.DEFAULT_TIMEOUT;
-    this.ecmHost = this.appConfigService.get('ecmHost');
 
     return this.open(entry, OfficeService.OPTIONS.EDIT);
   }
 
   private open(entry, option): Observable<any> {
+    this.ecmHost = this.appConfigService.get('ecmHost');
     const url = this.getUrl(entry);
     if (!this.isCompatible()) {
       return throwError({messageKey: 'OFFICE.WINDOWS_MAC_ONLY'});
@@ -122,6 +121,24 @@ interface DocumentMimeType {
 
 class DocumentTypes {
   static types: DocumentMimeType[] = [
+    {
+      extensions: [
+        'doc',
+        'docx',
+        'docm',
+        'dot',
+        'dotx',
+        'dotm'
+      ],
+      mimeTypes: [
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'application/vnd.ms-word.document.macroEnabled.12',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
+        'application/vnd.ms-word.template.macroEnabled.12'
+      ],
+      protocol: 'ms-word'
+    },
     {
       extensions: [
         'xls',
