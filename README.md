@@ -1,4 +1,4 @@
-# incentro-adf-msoffice-module
+# shine-office-module
 
 > **WARNING:** Version 7.X is *not* backwards compatible with any version below.
 
@@ -7,7 +7,7 @@
 To install this library, run:
 
 ```bash
-$ npm install incentro-adf-msoffice-module --save
+$ npm install shine-office-module --save
 ```
 
 ## Consuming your library
@@ -15,7 +15,7 @@ $ npm install incentro-adf-msoffice-module --save
 Once you have published your library to npm, you can import your library in any Angular application by running:
 
 ```bash
-$ npm install incentro-adf-msoffice-module
+$ npm install shine-office-module
 ```
 
 and then from your Angular `AppModule`:
@@ -27,7 +27,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 // Import your library
-import { OfficeModule } from 'incentro-adf-msoffice-module';
+import { OfficeModule } from 'shine-office-module';
 
 @NgModule({
   declarations: [

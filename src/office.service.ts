@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {NodeMinimal} from "@alfresco/adf-content-services";
-import {Observable, Subject, throwError} from "rxjs";
-import {AppConfigService} from "@alfresco/adf-core";
+import {Injectable} from '@angular/core';
+import {NodeMinimal} from '@alfresco/adf-content-services';
+import {Observable, Subject, throwError} from 'rxjs';
+import {AppConfigService} from '@alfresco/adf-core';
 
 @Injectable()
 export class OfficeService {

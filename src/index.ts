@@ -15,10 +15,10 @@ export * from './office.service';
   declarations: [],
   exports: []
 })
-export class IncentroOfficeModule {
+export class ShineOfficeModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: IncentroOfficeModule,
+      ngModule: ShineOfficeModule,
       providers: [OfficeService]
     };
   }
