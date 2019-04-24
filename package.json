@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/incentro-ondemand/shine-office.git"
+    "url": "git+ssh://git@github.com:incentro/shine-office-module.git"
   },
   "author": {
     "name": "Kasper Reijnders",
@@ -28,7 +28,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "git+ssh://git@bitbucket.org/incentro-ondemand/shine-office.git/issues"
+    "url": "https://github.com/incentro/shine-office-module/issues"
   },
   "devDependencies": {
     "@alfresco/adf-content-services": "2.6.1",
