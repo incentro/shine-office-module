@@ -1,11 +1,13 @@
-# incentro-adf-msoffice-module
+# shine-office-module
+
+> **WARNING:** Version 7.X is *not* backwards compatible with any version below.
 
 ## Installation
 
 To install this library, run:
 
 ```bash
-$ npm install incentro-adf-msoffice-module --save
+$ npm install shine-office-module --save
 ```
 
 ## Consuming your library
@@ -13,7 +15,7 @@ $ npm install incentro-adf-msoffice-module --save
 Once you have published your library to npm, you can import your library in any Angular application by running:
 
 ```bash
-$ npm install incentro-adf-msoffice-module
+$ npm install shine-office-module
 ```
 
 and then from your Angular `AppModule`:
@@ -25,7 +27,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 // Import your library
-import { SampleModule } from 'incentro-adf-msoffice-module';
+import { OfficeModule } from 'shine-office-module';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,7 @@ import { SampleModule } from 'incentro-adf-msoffice-module';
     BrowserModule,
 
     // Specify your library as an import
-    LibraryModule
+    OfficeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -45,13 +47,27 @@ export class AppModule { }
 
 Once your library is imported, you can use its components, directives and pipes in your Angular application:
 
-```xml
-<!-- You can now use your library component in app.component.html -->
-<h1>
-  {{title}}
-</h1>
-<sampleComponent></sampleComponent>
+```typescript
+import {OfficeService} from 'office.service.ts';
+
+@Component({...})
+export class MyComponent {
+  
+  constructor(private officeService: OfficeService)
+  
+  openFile(entry: NodeMinimal) {
+    this.officeService.view(entry);
+    this.officeService.edit(entry);
+  }
+}
 ```
+
+## API
+
+| *call*                    | *params*       | *returns*   |
+|---------------------------|----------------|-------------|
+| view(entry: NodeMinimal)  | entry, timout  | observable  |
+| edit(entry: NodeMinimal)  | entry, timout  | observable  |
 
 ## Development
 

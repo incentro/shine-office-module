@@ -21,8 +21,8 @@
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
-    "flatModuleOutFile": "incentro-adf-msoffice-module.js",
-    "flatModuleId": "incentro-adf-msoffice-module"
+    "flatModuleOutFile": "shine-office-module.js",
+    "flatModuleId": "shine-office-module"
   },
   "files": [
     "./index.ts"

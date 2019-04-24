@@ -1,12 +1,12 @@
 {
-  "name": "incentro-adf-msoffice-module",
-  "version": "6.2.0",
+  "name": "shine-office-module",
+  "version": "7.0.0",
   "description": "Office module for Alfresco Apps Development Framework. Edit with MS Office",
   "scripts": {
     "build": "gulp build",
     "build:watch": "gulp",
     "docs": "npm run docs:build",
-    "docs:build": "compodoc -p tsconfig.json -n incentro-adf-msoffice-module -d docs --hideGenerator",
+    "docs:build": "compodoc -p tsconfig.json -n shine-office-module -d docs --hideGenerator",
     "docs:serve": "npm run docs:build -- -s",
     "docs:watch": "npm run docs:build -- -s -w",
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/incentro-ondemand/shine-office.git"
+    "url": "git+ssh://git@github.com:incentro/shine-office-module.git"
   },
   "author": {
     "name": "Kasper Reijnders",
@@ -28,9 +28,12 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "git+ssh://git@bitbucket.org/incentro-ondemand/shine-office.git/issues"
+    "url": "https://github.com/incentro/shine-office-module/issues"
   },
   "devDependencies": {
+    "@alfresco/adf-content-services": "2.6.1",
+    "@alfresco/adf-core": "2.6.1",
+    "@alfresco/adf-extensions": "2.6.1",
     "@angular/common": "^6.1.10",
     "@angular/compiler": "^6.1.10",
     "@angular/compiler-cli": "^6.1.10",
@@ -40,6 +43,7 @@
     "@compodoc/compodoc": "^1.1.9",
     "@types/jasmine": "2.8.8",
     "@types/node": "^10.7.1",
+    "alfresco-js-api": "2.6.1",
     "angular-in-memory-web-api": "^0.6.1",
     "codelyzer": "~4.4.4",
     "concurrently": "^3.6.1",
