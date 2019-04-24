@@ -64,11 +64,10 @@ export class MyComponent {
 
 ## API
 
-| call  |   |   |   |   |
-|---|---|---|---|---|
-| view()  |   |   |   |   |
-| edit()  |   |   |   |   |
-|   |   |   |   |   |
+| *call*                    | *params*       | *returns*   |
+|---------------------------|----------------|-------------|
+| view(entry: NodeMinimal)  | entry, timout  | observable  |
+| edit(entry: NodeMinimal)  | entry, timout  | observable  |
 
 ## Development
 
