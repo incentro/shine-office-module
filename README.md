@@ -1,5 +1,7 @@
 # incentro-adf-msoffice-module
 
+> **WARNING:** Version 7.X is *not* backwards compatible with any version below.
+
 ## Installation
 
 To install this library, run:
@@ -25,7 +27,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 // Import your library
-import { SampleModule } from 'incentro-adf-msoffice-module';
+import { OfficeModule } from 'incentro-adf-msoffice-module';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,7 @@ import { SampleModule } from 'incentro-adf-msoffice-module';
     BrowserModule,
 
     // Specify your library as an import
-    LibraryModule
+    OfficeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -45,13 +47,28 @@ export class AppModule { }
 
 Once your library is imported, you can use its components, directives and pipes in your Angular application:
 
-```xml
-<!-- You can now use your library component in app.component.html -->
-<h1>
-  {{title}}
-</h1>
-<sampleComponent></sampleComponent>
+```typescript
+import {OfficeService} from 'office.service.ts';
+
+@Component({...})
+export class MyComponent {
+  
+  constructor(private officeService: OfficeService)
+  
+  openFile(entry: NodeMinimal) {
+    this.officeService.view(entry);
+    this.officeService.edit(entry);
+  }
+}
 ```
+
+## API
+
+| call  |   |   |   |   |
+|---|---|---|---|---|
+| view()  |   |   |   |   |
+| edit()  |   |   |   |   |
+|   |   |   |   |   |
 
 ## Development
 

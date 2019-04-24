@@ -1,6 +1,6 @@
 {
   "name": "incentro-adf-msoffice-module",
-  "version": "6.2.0",
+  "version": "7.0.0",
   "description": "Office module for Alfresco Apps Development Framework. Edit with MS Office",
   "scripts": {
     "build": "gulp build",
@@ -31,6 +31,9 @@
     "url": "git+ssh://git@bitbucket.org/incentro-ondemand/shine-office.git/issues"
   },
   "devDependencies": {
+    "@alfresco/adf-content-services": "2.6.1",
+    "@alfresco/adf-core": "2.6.1",
+    "@alfresco/adf-extensions": "2.6.1",
     "@angular/common": "^6.1.10",
     "@angular/compiler": "^6.1.10",
     "@angular/compiler-cli": "^6.1.10",
@@ -40,6 +43,7 @@
     "@compodoc/compodoc": "^1.1.9",
     "@types/jasmine": "2.8.8",
     "@types/node": "^10.7.1",
+    "alfresco-js-api": "2.6.1",
     "angular-in-memory-web-api": "^0.6.1",
     "codelyzer": "~4.4.4",
     "concurrently": "^3.6.1",

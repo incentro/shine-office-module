@@ -1,6 +1,6 @@
 {
   "name": "incentro-adf-msoffice-module",
-  "version": "6.2.0",
+  "version": "7.0.0",
   "description": "Office module for Alfresco Apps Development Framework. Edit with MS Office",
   "repository": {
     "type": "git",
@@ -27,6 +27,8 @@
   "typings": "incentro-adf-msoffice-module.d.ts",
   "peerDependencies": {
     "@angular/core": "^6.1.3",
+    "@alfresco/adf-content-services": "^2.6.1",
+    "@alfresco/adf-core": "^2.6.1",
     "rxjs": "^6.2.2",
     "zone.js": "^0.8.26"
   }
