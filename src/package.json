@@ -4,7 +4,10 @@
   "description": "Office module for Alfresco Apps Development Framework. Edit with MS Office",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/incentro-ondemand/shine-office.git"
+    "url": "git+ssh://git@github.com:incentro/shine-office-module.git"
+  },
+  "bugs": {
+    "url": "https://github.com/incentro/shine-office-module/issues"
   },
   "author": {
     "name": "Kasper Reijnders",
